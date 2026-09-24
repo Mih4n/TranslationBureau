@@ -18,4 +18,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TranslationBureau.Domain\TranslationBureau.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
