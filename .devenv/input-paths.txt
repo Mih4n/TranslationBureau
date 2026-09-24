@@ -1,0 +1,8 @@
+/home/mih4n/Work/Arqutechure/work/.devenv/bootstrap/bootstrapLib.nix
+/home/mih4n/Work/Arqutechure/work/.devenv/bootstrap/default.nix
+/home/mih4n/Work/Arqutechure/work/.devenv/bootstrap/resolve-lock.nix
+/home/mih4n/Work/Arqutechure/work/devenv.local.nix
+/home/mih4n/Work/Arqutechure/work/devenv.lock
+/home/mih4n/Work/Arqutechure/work/devenv.nix
+/home/mih4n/Work/Arqutechure/work/devenv.yaml
+/home/mih4n/Work/Arqutechure/work/.env

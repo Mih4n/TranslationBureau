@@ -1,0 +1,48 @@
+name: Build, Test and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and publish on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+
+    steps:
+      - name: Load program code
+        uses: actions/checkout@v4
+
+      - name: Кэширование пакетов NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: ${{ runner.os }}-nuget-
+
+      - name: Восстановление зависимостей
+        run: dotnet restore
+
+      - name: Сборка решения
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Выполнение модульных тестов
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Публикация приложения
+        run: dotnet publish TranslationBureau.Web --configuration Release --no-build --output ./publish
+
+      - name: Сохранение артефакта сборки
+        uses: actions/upload-artifact@v4
+        with:
+          name: TranslationBureau-${{ matrix.os }}
+          path: ./publish/**
+          retention-days: 30
